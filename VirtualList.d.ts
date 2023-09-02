@@ -1,4 +1,4 @@
-declare module "VirtualList" {
+declare module "svelte-virtual-list-ce" {
   import { SvelteComponent } from "svelte";
 
   interface VirtualListProps {
