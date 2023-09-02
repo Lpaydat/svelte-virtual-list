@@ -9,11 +9,9 @@
   // read-only, but visible to consumers via bind:start
   export let start = 0;
   export let end = 0;
-
   export let isAtTop = true;
   export let isAtBottom = false;
 
-  let stickToBottom = false;
   // local state
   let height_map = [];
   let rows;
@@ -72,15 +70,11 @@
   }
 
   async function handle_scroll() {
-    const { scrollTop, scrollHeight } = viewport;
+    const { scrollTop, scrollHeight, clientHeight } = viewport;
 
     // Determine if the scrollbar is at the top or bottom
     isAtTop = scrollTop === 0;
-    isAtBottom = scrollTop === scrollHeight - viewport.offsetHeight;
-
-    if (stickToBottom && isAtBottom) {
-      await scrollToBottom();
-    }
+    isAtBottom = scrollTop + clientHeight === scrollHeight;
 
     const old_start = start;
 
@@ -138,13 +132,13 @@
     viewport.scrollTo(opts);
   }
 
-  export async function scrollToBottom(shouldStickToBottom = false) {
-    stickToBottom = shouldStickToBottom;
+  export async function scrollToBottom(opts) {
     const { scrollHeight } = viewport;
     viewport.scrollTo({
       left: 0,
       top: scrollHeight,
       behavior: "smooth",
+      ...opts,
     });
   }
 
