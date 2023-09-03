@@ -9,11 +9,9 @@ declare module "svelte-virtual-list-ce" {
     end?: number;
     isAtTop?: boolean;
     isAtBottom?: boolean;
-  }
 
-  interface VirtualListMethods {
-    scrollToIndex(index: number, opts?: ScrollToOptions): Promise<void>;
-    scrollToBottom(shouldStickToBottom?: boolean): Promise<void>;
+    scrollToIndex?: (index: number, opts?: ScrollToOptions) => Promise<void>;
+    scrollToBottom?: (opt?: object) => Promise<void>;
   }
 
   interface VirtualListEvents {
@@ -22,8 +20,7 @@ declare module "svelte-virtual-list-ce" {
 
   class VirtualList extends SvelteComponent<
     VirtualListProps,
-    VirtualListEvents,
-    VirtualListMethods
+    VirtualListEvents
   > {}
 
   export default VirtualList;
