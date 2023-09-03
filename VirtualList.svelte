@@ -11,6 +11,8 @@
   export let end = 0;
   export let isAtTop = true;
   export let isAtBottom = false;
+  export let isScrollUp = false;
+  export let isScrollDown = false;
 
   // local state
   let height_map = [];
@@ -20,6 +22,7 @@
   let viewport_height = 0;
   let visible;
   let mounted;
+  let lastScrollTop = 0;
 
   let top = 0;
   let bottom = 0;
@@ -75,6 +78,11 @@
     // Determine if the scrollbar is at the top or bottom
     isAtTop = scrollTop === 0;
     isAtBottom = scrollTop + clientHeight === scrollHeight;
+
+    // Determine if user scroll-up or scroll-down
+    isScrollUp = scrollTop < lastScrollTop;
+    isScrollDown = scrollTop > lastScrollTop;
+    lastScrollTop = scrollTop;
 
     const old_start = start;
 
