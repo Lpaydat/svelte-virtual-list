@@ -11,8 +11,6 @@ declare module "svelte-virtual-list-ce" {
     isAtBottom?: boolean;
     isScrollUp?: boolean;
     isScrollDown?: boolean;
-    viewportClass?: string;
-    contentsClass?: string;
 
     scrollToIndex?: (index: number, opts?: ScrollToOptions) => Promise<void>;
     scrollToBottom?: (opt?: object) => Promise<void>;
