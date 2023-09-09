@@ -5,6 +5,8 @@
   export let items;
   export let height = "100%";
   export let itemHeight = undefined;
+  export let viewportClass = "";
+  export let contentsClass = "";
 
   // read-only, but visible to consumers via bind:start
   export let start = 0;
@@ -165,10 +167,12 @@
   bind:offsetHeight={viewport_height}
   on:scroll={handle_scroll}
   style="height: {height};"
+  class={viewportClass}
 >
   <svelte-virtual-list-contents
     bind:this={contents}
     style="padding-top: {top}px; padding-bottom: {bottom}px;"
+    class={contentsClass}
   >
     {#each visible as row (row.index)}
       <svelte-virtual-list-row>
